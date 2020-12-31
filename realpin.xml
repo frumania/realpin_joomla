@@ -1,0 +1,274 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension type="component" version="3.0" method="upgrade">
+
+	<name>RealPin</name>
+	<creationDate>January 2021</creationDate>
+	<author>frumania</author>
+	<authorEmail>info@frumania.com</authorEmail>
+	<authorUrl>https://frumania.com</authorUrl>
+	<copyright>All rights reserved</copyright>
+	<license>GNU/GPL</license>
+	<version>1.6.0</version>
+	<description></description>
+
+	<scriptfile>install.php</scriptfile>
+
+	<files folder="site">
+
+	<filename>controller.php</filename>
+	<filename>index.html</filename>
+	<filename>realpin.php</filename>
+
+	<filename>includes/embed/AutoEmbed.class.php</filename>
+	<filename>includes/embed/stubs.php</filename>
+	<filename>includes/ismobile.php</filename>
+	<filename>includes/css.php</filename>
+	<filename>includes/functions.php</filename>
+	<filename>includes/js.php</filename>
+	<filename>includes/realpin.php</filename>
+	<filename>includes/static_css.php</filename>
+	<filename>includes/static_js.php</filename>
+	<filename>includes/css/tesa_l.png</filename>
+	<filename>includes/css/tesa_r.png</filename>
+	<filename>includes/css/ajax-loader.gif</filename>
+	<filename>includes/css/ajax-loader2.gif</filename>
+	<filename>includes/css/back.png</filename>
+	<filename>includes/css/backward.png</filename>
+	<filename>includes/css/forward.png</filename>
+	<filename>includes/css/icons_small.png</filename>
+	<filename>includes/css/icon_info.png</filename>
+	<filename>includes/css/icon_info_small.png</filename>
+	<filename>includes/css/inline.png</filename>
+	<filename>includes/css/kork_low.jpg</filename>
+	<filename>includes/css/logo_quer.png</filename>
+	<filename>includes/css/logo_small.png</filename>
+	<filename>includes/css/marker.png</filename>
+	<filename>includes/css/new_de-de.png</filename>
+	<filename>includes/css/new_en-gb.png</filename>
+	<filename>includes/css/no_pic.jpg</filename>
+	<filename>includes/css/Penguins.jpg</filename>
+	<filename>includes/css/pin_red.png</filename>
+	<filename>includes/css/pin_yellow.png</filename>
+	<filename>includes/css/playbutton.png</filename>
+	<filename>includes/css/postit_advanced.png</filename>
+	<filename>includes/css/Recycle-Bin-Empty-icon.png</filename>
+	<filename>includes/css/Recycle-Bin-Full-icon.png</filename>
+	<filename>includes/css/scrolldown.png</filename>
+	<filename>includes/css/scrollup.png</filename>
+	<filename>includes/css/shadow1.png</filename>
+	<filename>includes/css/shadow2.png</filename>
+	<filename>includes/css/wooden.jpg</filename>
+	<filename>includes/css/wood_low.jpg</filename>
+	<filename>includes/css/youtube-logo.jpg</filename>
+	<filename>includes/css/admin/icon.png</filename>
+	<filename>includes/css/admin/logo_news.png</filename>
+	<filename>includes/css/admin/logo_pro.png</filename>
+	<filename>includes/css/admin/logo_version.png</filename>
+	<filename>includes/css/new/bild.jpg</filename>
+	<filename>includes/css/new/bild_bw.jpg</filename>
+	<filename>includes/css/new/postit.jpg</filename>
+	<filename>includes/css/new/postit_bw.jpg</filename>
+	<filename>includes/css/new/video.jpg</filename>
+	<filename>includes/css/new/video_bw.jpg</filename>
+	<filename>includes/css/share/delicious.png</filename>
+	<filename>includes/css/share/digg.png</filename>
+	<filename>includes/css/share/facebook.png</filename>
+	<filename>includes/css/share/google-buzz.png</filename>
+	<filename>includes/css/share/stumbleupon.png</filename>
+	<filename>includes/css/share/twitter.png</filename>
+	<filename>includes/fonts/cartohothic-webfont.eot</filename>
+	<filename>includes/fonts/cartohothic-webfont.svg</filename>
+	<filename>includes/fonts/cartohothic-webfont.ttf</filename>
+	<filename>includes/fonts/cartohothic-webfont.woff</filename>
+	<filename>includes/fonts/chinese.eot</filename>
+	<filename>includes/fonts/chinese.svg</filename>
+	<filename>includes/fonts/chinese.ttf</filename>
+	<filename>includes/fonts/chinese.woff</filename>
+	<filename>includes/fonts/journal-webfont.eot</filename>
+	<filename>includes/fonts/journal-webfont.svg</filename>
+	<filename>includes/fonts/journal-webfont.ttf</filename>
+	<filename>includes/fonts/journal-webfont.woff</filename>
+	<filename>includes/fonts/paulmaul-webfont.eot</filename>
+	<filename>includes/fonts/paulmaul-webfont.svg</filename>
+	<filename>includes/fonts/paulmaul-webfont.ttf</filename>
+	<filename>includes/fonts/paulmaul-webfont.woff</filename>
+	<filename>includes/fonts/ptsans-webfont.eot</filename>
+	<filename>includes/fonts/ptsans-webfont.svg</filename>
+	<filename>includes/fonts/ptsans-webfont.ttf</filename>
+	<filename>includes/fonts/ptsans-webfont.woff</filename>
+	<filename>includes/fonts/quill-webfont.eot</filename>
+	<filename>includes/fonts/quill-webfont.svg</filename>
+	<filename>includes/fonts/quill-webfont.ttf</filename>
+	<filename>includes/fonts/quill-webfont.woff</filename>
+	<filename>includes/fonts/russian-webfont.eot</filename>
+	<filename>includes/fonts/russian-webfont.svg</filename>
+	<filename>includes/fonts/russian-webfont.ttf</filename>
+	<filename>includes/fonts/russian-webfont.woff</filename>
+	<filename>includes/fonts/sansation-webfont.eot</filename>
+	<filename>includes/fonts/sansation-webfont.svg</filename>
+	<filename>includes/fonts/sansation-webfont.ttf</filename>
+	<filename>includes/fonts/sansation-webfont.woff</filename>
+	<filename>includes/js/jquery_touch.js</filename>
+	<filename>includes/js/jquery.min.js</filename>
+	<filename>includes/js/jquery-ui.custom.min.js</filename>
+	<filename>includes/js/rp_js1.js</filename>
+	<filename>includes/js/rp_js2.js</filename>
+	<filename>includes/js/photoswipe/code.photoswipe.jquery-3.0.4.min.js</filename>
+	<filename>includes/js/photoswipe/error.gif</filename>
+	<filename>includes/js/photoswipe/icons.png</filename>
+	<filename>includes/js/photoswipe/icons@2x.png</filename>
+	<filename>includes/js/photoswipe/klass.min.js</filename>
+	<filename>includes/js/photoswipe/photoswipe.css</filename>
+	<filename>includes/js/photoswipe/loader.gif</filename>
+	<filename>includes/js/fancybox/blank.gif</filename>
+	<filename>includes/js/fancybox/fancybox-x.png</filename>
+	<filename>includes/js/fancybox/fancybox-y.png</filename>
+	<filename>includes/js/fancybox/fancybox.png</filename>
+	<filename>includes/js/fancybox/fancy_close.png</filename>
+	<filename>includes/js/fancybox/fancy_loading.png</filename>
+	<filename>includes/js/fancybox/fancy_nav_left.png</filename>
+	<filename>includes/js/fancybox/fancy_nav_right.png</filename>
+	<filename>includes/js/fancybox/fancy_shadow_e.png</filename>
+	<filename>includes/js/fancybox/fancy_shadow_n.png</filename>
+	<filename>includes/js/fancybox/fancy_shadow_ne.png</filename>
+	<filename>includes/js/fancybox/fancy_shadow_nw.png</filename>
+	<filename>includes/js/fancybox/fancy_shadow_s.png</filename>
+	<filename>includes/js/fancybox/fancy_shadow_se.png</filename>
+	<filename>includes/js/fancybox/fancy_shadow_sw.png</filename>
+	<filename>includes/js/fancybox/fancy_shadow_w.png</filename>
+	<filename>includes/js/fancybox/fancy_title_left.png</filename>
+	<filename>includes/js/fancybox/fancy_title_main.png</filename>
+	<filename>includes/js/fancybox/fancy_title_over.png</filename>
+	<filename>includes/js/fancybox/fancy_title_right.png</filename>
+	<filename>includes/js/fancybox/jquery.fancybox-1.3.4.css</filename>
+	<filename>includes/js/gritter/gritter-close-ie6.gif</filename>
+	<filename>includes/js/gritter/gritter-long.png</filename>
+	<filename>includes/js/gritter/gritter.png</filename>
+	<filename>includes/js/gritter/jquery.gritter.css</filename>
+	<filename>models/rpdefault.php</filename>
+	<filename>models/rpparameter.php</filename>
+	<filename>models/fields/realpin.php</filename>
+	<filename>views/index.html</filename>
+	<filename>views/rpdefault/index.html</filename>
+	<filename>views/rpdefault/view.ajax.php</filename>
+	<filename>views/rpdefault/view.html.php</filename>
+	<filename>views/rpdefault/view.json.php</filename>
+	<filename>views/rpdefault/view.feed.php</filename>
+	<filename>views/rpdefault/tmpl/default.php</filename>
+	<filename>views/rpdefault/tmpl/default.xml</filename>
+	<filename>views/rpdefault/tmpl/index.html</filename>
+	<filename>views/rpparameter/index.html</filename>
+	<filename>views/rpparameter/view.html.php</filename>
+	<filename>views/rpparameter/tmpl/default.php</filename>
+	<filename>views/rpparameter/tmpl/index.html</filename>
+
+	</files>
+
+	<!-- Language -->
+	<languages>
+		<language tag="en-GB">site/language/en-GB/en-GB.com_realpin.ini</language>
+		<language tag="de-DE">site/language/de-DE/de-DE.com_realpin.ini</language>
+	</languages>
+
+   <install>
+      <sql>
+         <file charset="utf8" driver="mysql">install.sql</file>
+      </sql>
+   </install>
+
+
+	<administration>
+
+	<menu img="../components/com_realpin/includes/css/admin/icon.png" link="option=com_realpin">RealPin</menu>
+
+	<files folder="admin">
+
+	<filename>realpin.php</filename>
+	<filename>controller.php</filename>
+	<filename>index.html</filename>
+	<filename>install.sql</filename>
+	<filename>controllers/edit.php</filename>
+	<filename>controllers/editpinboard.php</filename>
+	<filename>controllers/global.php</filename>
+	<filename>controllers/index.html</filename>
+	<filename>controllers/management.php</filename>
+	<filename>controllers/pinboards.php</filename>
+	<filename>includes/ajax_upload/ajaxupload.3.6.js</filename>
+	<filename>includes/color_picker/css/colorpicker.css</filename>
+	<filename>includes/color_picker/images/blank.gif</filename>
+	<filename>includes/color_picker/images/colorpicker_background.png</filename>
+	<filename>includes/color_picker/images/colorpicker_hex.png</filename>
+	<filename>includes/color_picker/images/colorpicker_hsb_b.png</filename>
+	<filename>includes/color_picker/images/colorpicker_hsb_h.png</filename>
+	<filename>includes/color_picker/images/colorpicker_hsb_s.png</filename>
+	<filename>includes/color_picker/images/colorpicker_indic.gif</filename>
+	<filename>includes/color_picker/images/colorpicker_overlay.png</filename>
+	<filename>includes/color_picker/images/colorpicker_rgb_b.png</filename>
+	<filename>includes/color_picker/images/colorpicker_rgb_g.png</filename>
+	<filename>includes/color_picker/images/colorpicker_rgb_r.png</filename>
+	<filename>includes/color_picker/images/colorpicker_select.gif</filename>
+	<filename>includes/color_picker/images/colorpicker_submit.png</filename>
+	<filename>includes/color_picker/images/custom_background.png</filename>
+	<filename>includes/color_picker/images/custom_hex.png</filename>
+	<filename>includes/color_picker/images/custom_hsb_b.png</filename>
+	<filename>includes/color_picker/images/custom_hsb_h.png</filename>
+	<filename>includes/color_picker/images/custom_hsb_s.png</filename>
+	<filename>includes/color_picker/images/custom_indic.gif</filename>
+	<filename>includes/color_picker/images/custom_rgb_b.png</filename>
+	<filename>includes/color_picker/images/custom_rgb_g.png</filename>
+	<filename>includes/color_picker/images/custom_rgb_r.png</filename>
+	<filename>includes/color_picker/images/custom_submit.png</filename>
+	<filename>includes/color_picker/images/select.png</filename>
+	<filename>includes/color_picker/images/select2.png</filename>
+	<filename>includes/color_picker/images/slider.png</filename>
+	<filename>includes/color_picker/js/colorpicker.js</filename>
+	<filename>models/edit.php</filename>
+	<filename>models/editpinboard.php</filename>
+	<filename>models/global.php</filename>
+	<filename>models/index.html</filename>
+	<filename>models/start.php</filename>
+	<filename>tables/edit.php</filename>
+	<filename>tables/editpinboard.php</filename>
+	<filename>tables/index.html</filename>
+	<filename>views/edit/index.html</filename>
+	<filename>views/edit/view.html.php</filename>
+	<filename>views/edit/tmpl/form.php</filename>
+	<filename>views/edit/tmpl/index.html</filename>
+	<filename>views/editpinboard/index.html</filename>
+	<filename>views/editpinboard/view.html.php</filename>
+	<filename>views/editpinboard/tmpl/form.php</filename>
+	<filename>views/editpinboard/tmpl/index.html</filename>
+	<filename>views/global/index.html</filename>
+	<filename>views/global/view.html.php</filename>
+	<filename>views/global/tmpl/default.php</filename>
+	<filename>views/global/tmpl/index.html</filename>
+	<filename>views/management/index.html</filename>
+	<filename>views/management/view.html.php</filename>
+	<filename>views/management/tmpl/default.php</filename>
+	<filename>views/management/tmpl/index.html</filename>
+	<filename>views/pinboards/index.html</filename>
+	<filename>views/pinboards/view.html.php</filename>
+	<filename>views/pinboards/tmpl/default.php</filename>
+	<filename>views/pinboards/tmpl/index.html</filename>
+	<filename>views/start/index.html</filename>
+	<filename>views/start/view.html.php</filename>
+	<filename>views/start/tmpl/default.php</filename>
+	<filename>views/start/tmpl/index.html</filename>
+
+	</files>
+
+	<!-- Language -->
+	<languages>
+		<language tag="en-GB">admin/language/en-GB/en-GB.com_realpin.ini</language>
+		<language tag="en-GB">admin/language/en-GB/en-GB.com_realpin.sys.ini</language>
+		<language tag="de-DE">admin/language/de-DE/de-DE.com_realpin.ini</language>
+		<language tag="de-DE">admin/language/de-DE/de-DE.com_realpin.sys.ini</language>
+	</languages>
+
+	</administration>
+
+	<updateservers>
+		<server type="extension" priority="1" name="Realpin Updates">https://realpin.frumania.com/update/realpin-update-3.xml</server>
+	</updateservers>
+
+</extension>

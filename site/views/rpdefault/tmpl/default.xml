@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<metadata>
+	<layout title="REALPIN_MENU_CATEGORY_LIST_LAYOUT">
+		<message>REALPIN_MENU_CATEGORY_LIST_LAYOUT_DESC</message>
+	</layout>
+
+	<state>
+		<name>REALPIN_MENU_CATEGORY_LIST_LAYOUT</name>
+		<description>REALPIN_MENU_CATEGORY_LIST_LAYOUT_DESC</description>
+		<url>
+			<param name="pinboard" type="sql" default="0" label="REALPIN_MENU_CATEGORY_LIST_LABEL1" description="REALPIN_MENU_CATEGORY_LIST_LABEL1_DESC" query="SELECT config_id, config_name FROM #__realpin_settings WHERE published = 1 AND config_community = 0 AND config_name NOT LIKE 'default_private' AND config_name NOT LIKE 'default_private_global' ORDER BY config_name ASC" key_field="config_id" value_field="config_name"  />
+		</url>
+		<params>
+
+		</params>
+	</state>
+	
+	<fields
+		name="request"
+		addfieldpath="/components/com_realpin/models/fields">
+		<fieldset name="request">
+			<field
+				name="pinboard"
+				type="realpin"
+				label="REALPIN_MENU_CATEGORY_LIST_LABEL1"
+				description="REALPIN_MENU_CATEGORY_LIST_LABEL1_DESC"
+			/>
+		</fieldset>
+	</fields>
+
+</metadata>

@@ -1,2 +1,3 @@
-# realpin_joomla
-Virtual Pinboard Joomla Extension
+# Overview
+
+Virtual Pinboard for Joomla
