@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <updates>
-      <update>
+   <update>
       <name>RealPin</name>
       <description></description>
       <element>com_realpin</element>
@@ -13,7 +13,7 @@
       <tags>
          <tag>stable</tag>
       </tags>
-      <maintainer>https://realpin.frumania.com<</maintainer>
+      <maintainer>https://realpin.frumania.com</maintainer>
       <targetplatform name="joomla" version="3"></targetplatform>
    </update>
 </updates>
