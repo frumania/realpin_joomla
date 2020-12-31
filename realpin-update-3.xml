@@ -1,43 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <updates>
-   <update>
-      <name>RealPin</name>
-      <description></description>
-      <element>com_realpin</element>
-      <type>component</type>
-      <version>1.6.0</version>
- 
-      <infourl title="RealPin URL">https://realpin.frumania.com</infourl>
-      <downloads>
-         <downloadurl type="full" format="zip">https://realpin.frumania.com/update/com_realpin_j3_latest.zip</downloadurl>
-      </downloads>
-      <tags>
-         <tag>stable</tag>
-      </tags>
- 
-      <maintainer>Marcel Toerpe</maintainer>
-      <maintainerurl>https://realpin.frumania.com</maintainerurl>
-      <section></section>
-      <targetplatform name="joomla" version="2.5"></targetplatform>
-   </update>
       <update>
       <name>RealPin</name>
       <description></description>
       <element>com_realpin</element>
       <type>component</type>
       <version>1.6.0</version>
- 
       <infourl title="RealPin URL">https://realpin.frumania.com</infourl>
       <downloads>
-         <downloadurl type="full" format="zip">https://realpin.frumania.com/update/com_realpin_j3_latest.zip</downloadurl>
+         <downloadurl type="full" format="zip">https://github.com/frumania/realpin_joomla/archive/v.1.6.0.zip</downloadurl>
       </downloads>
       <tags>
          <tag>stable</tag>
       </tags>
- 
-      <maintainer>Marcel Toerpe</maintainer>
-      <maintainerurl>https://realpin.frumania.com</maintainerurl>
-      <section></section>
+      <maintainer>https://realpin.frumania.com<</maintainer>
       <targetplatform name="joomla" version="3"></targetplatform>
    </update>
 </updates>

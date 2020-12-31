@@ -268,7 +268,7 @@
 	</administration>
 
 	<updateservers>
-		<server type="extension" priority="1" name="Realpin Updates">https://realpin.frumania.com/update/realpin-update-3.xml</server>
+		<server type="extension" priority="1" name="Realpin Updates">https://raw.githubusercontent.com/frumania/realpin_joomla/main/realpin-update-3.xml</server>
 	</updateservers>
 
 </extension>
