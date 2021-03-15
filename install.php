@@ -16,7 +16,7 @@ if(!defined('DS')){
 define('DS',DIRECTORY_SEPARATOR);
 }
 
-define('RP_VERSION', '1.6.0');
+define('RP_VERSION', '1.6.1');
 
 //Install 1.5
 function com_install()

@@ -361,14 +361,14 @@ $author_id=$data[$h][9];
           <br />
 
           <?php if (USER >= 24){ ?>
-          <span class="rp_sticky" title="<?php echo JText::_('LANG_STICKY_ALT'); ?>">
+          <div style="margin-top:10px" class="rp_sticky" title="<?php echo JText::_('LANG_STICKY_ALT'); ?>">
             <input style="width:20px!important" type="checkbox" id="new_image_sticky" name="new_image_sticky"><?php echo JText::_('LANG_STICKY'); ?>
-          </span>
-          <br/>
+          </div>
+
           <?php } ?>
-          <span class="rp_gdpr" title="<?php echo JText::_('LANG_GDPR_ALT'); ?>">
+          <div style="margin-top:10px" class="rp_gdpr" title="<?php echo JText::_('LANG_GDPR_ALT'); ?>">
             <input style="width:20px!important" type="checkbox" id="new_gdpr" name="new_gdpr"><?php echo JText::_('LANG_GDPR'); ?>
-          </span>
+          </div>
 
           </form>
 		
@@ -447,14 +447,14 @@ $author_id=$data[$h][9];
           <textarea name="new_postit_text" id="new_postit_text" class="new_input_text" cols="25" rows="6"></textarea>
           <br />
           <?php if (USER >= 24){ ?>
-          <span class="rp_sticky" title="<?php echo JText::_('LANG_STICKY_ALT'); ?>">
+          <div style="margin-top:10px" class="rp_sticky" title="<?php echo JText::_('LANG_STICKY_ALT'); ?>">
             <input style="width:20px!important" type="checkbox" id="new_image_sticky" name="new_image_sticky"><?php echo JText::_('LANG_STICKY'); ?>
-          </span>
-          <br/>
+          </div>
+
           <?php } ?>
-          <span class="rp_gdpr" title="<?php echo JText::_('LANG_GDPR_ALT'); ?>">
+          <div style="margin-top:10px" class="rp_gdpr" title="<?php echo JText::_('LANG_GDPR_ALT'); ?>">
             <input style="width:20px!important" type="checkbox" id="new_gdpr" name="new_gdpr"><?php echo JText::_('LANG_GDPR'); ?>
-          </span>
+          </div>
           </form>
 		
 		</div>
@@ -525,14 +525,14 @@ $author_id=$data[$h][9];
           <textarea name="new_video_text" id="new_video_text" class="new_input_text" cols="25" rows="7"></textarea>
           <br />
           <?php if (USER >= 24){ ?>
-          <span class="rp_sticky" title="<?php echo JText::_('LANG_STICKY_ALT'); ?>">
+          <div style="margin-top:10px" class="rp_sticky" title="<?php echo JText::_('LANG_STICKY_ALT'); ?>">
             <input style="width:20px!important" type="checkbox" id="new_image_sticky" name="new_image_sticky"><?php echo JText::_('LANG_STICKY'); ?>
-          </span>
-          <br/>
+          </div>
+
           <?php } ?>
-          <span class="rp_gdpr" title="<?php echo JText::_('LANG_GDPR_ALT'); ?>">
+          <div style="margin-top:10px" class="rp_gdpr" title="<?php echo JText::_('LANG_GDPR_ALT'); ?>">
             <input style="width:20px!important" type="checkbox" id="new_gdpr" name="new_gdpr"><?php echo JText::_('LANG_GDPR'); ?>
-          </span>
+          </div>
           </form>
 		
 		</div>
