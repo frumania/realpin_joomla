@@ -16,7 +16,7 @@ if(!defined('DS')){
 define('DS',DIRECTORY_SEPARATOR);
 }
 
-define('RP_VERSION', '1.6.1');
+define('RP_VERSION', '1.6.2');
 
 //Install 1.5
 function com_install()
@@ -155,6 +155,7 @@ class com_realpinInstallerScript
 		com_realpinInstallerScript::add_column_if_not_exist("#__realpin_settings", "pic_no_restrict_size","text NOT NULL","1024000");
 		com_realpinInstallerScript::add_column_if_not_exist("#__realpin_settings", "css_file","text NOT NULL","1");
 		com_realpinInstallerScript::add_column_if_not_exist("#__realpin_settings", "custom_css","text NOT NULL","");
+		com_realpinInstallerScript::add_column_if_not_exist("#__realpin_settings", "gdpr","text NOT NULL","1");
 
 		com_realpinInstallerScript::updateVersion();
 

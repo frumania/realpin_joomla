@@ -683,6 +683,7 @@ echo JHtml::_('bootstrap.startTabSet', 'ID-Tabs-J31-Group', $this->tabsOptionsJ3
 	<?php render_radio("MAIN",USERNAME,USERNAME_GLOBAL,"USERNAME",array(JText::_('LANG_MAIN_USERNAME_A'),JText::_('LANG_MAIN_USERNAME_B'))); ?>
     <?php render_radio("MAIN",USEREDIT,USEREDIT_GLOBAL,"USEREDIT",array(JText::_('LANG_NO'),JText::_('LANG_YES'))); ?> 
     <?php render_radio("MAIN",CSS_FILE,CSS_FILE_GLOBAL,"CSS_FILE",array(JText::_('LANG_NO'),JText::_('LANG_YES'))); ?>
+	<?php render_radio("MAIN",GDPR,GDPR_GLOBAL,"GDPR",array(JText::_('LANG_NO'),JText::_('LANG_YES'))); ?>
         
 <?php echo "</table>"; echo JHtml::_('bootstrap.endTab');  } ?>
 
