@@ -1435,9 +1435,9 @@ var rptext = <?php echo $rpjs; ?>('textarea[name=new_image_text]').val();
 var rptitle = <?php echo $rpjs; ?>('input[name=new_image_title]').val();
 var rpsticky = <?php echo $rpjs; ?>('input[name=new_image_sticky]').is(':checked');
 
-var rpgdpr = <?php echo $rpjs; ?>('input[name=new_gdpr]').is(':checked');
+var rpgdpr_elem = <?php echo $rpjs; ?>('input[name=new_gdpr]');
 
-if(!rpgdpr)
+if(rpgdpr_elem.length && !rpgdpr_elem.is(':checked'))
 {
 	gritter_message('<?php echo JText::_('LANG_GDPR_ERROR'); ?>'); //Error
 	isHandlerAddingActive = false;
@@ -1534,9 +1534,9 @@ var rpauthor_id = <?php echo $rpjs; ?>('input[name=rp_author_id]').val();
 var rptext = <?php echo $rpjs; ?>('textarea[name=new_postit_text]').val();
 var rpsticky = <?php echo $rpjs; ?>('input[name=new_postit_sticky]').is(':checked');
 
-var rpgdpr = <?php echo $rpjs; ?>('input[name=new_gdpr]').is(':checked');
+var rpgdpr_elem = <?php echo $rpjs; ?>('input[name=new_gdpr]');
 
-if(!rpgdpr)
+if(rpgdpr_elem.length && !rpgdpr_elem.is(':checked'))
 {
 	gritter_message('<?php echo JText::_('LANG_GDPR_ERROR'); ?>'); //Error
 	isHandlerAddingActive = false;
@@ -1628,9 +1628,9 @@ var rpurl = <?php echo $rpjs; ?>('input[name=new_video_url]').val();
 var rpsticky = <?php echo $rpjs; ?>('input[name=new_video_sticky]').is(':checked');
 var rptitle ="";
 
-var rpgdpr = <?php echo $rpjs; ?>('input[name=new_gdpr]').is(':checked');
+var rpgdpr_elem = <?php echo $rpjs; ?>('input[name=new_gdpr]');
 
-if(!rpgdpr)
+if(rpgdpr_elem.length && !rpgdpr_elem.is(':checked'))
 {
 	gritter_message('<?php echo JText::_('LANG_GDPR_ERROR'); ?>'); //Error
 	isHandlerAddingActive = false;

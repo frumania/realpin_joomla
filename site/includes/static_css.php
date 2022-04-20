@@ -564,14 +564,14 @@ text-align:left;
 {
 font-size:10px!important;
 border-style: none!important;
-background-color:#fdefc5!important; 
+background-color:#fdefc5;
 font-family: Arial, Helvetica, sans-serif !important;
 outline:none!important;
 color:#000!important;
 line-height:normal!important;
 text-align:left!important;
 padding:0!important;
-background-image:none!important;
+background-image:none;
 width: 140px!important;
 }
 
