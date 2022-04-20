@@ -8,6 +8,16 @@
 
 defined('_JEXEC') or die('Restricted access');
 
+?>
+
+<div id="j-sidebar-container" class="span2">
+<?php echo JHtmlSidebar::render(); ?>
+</div>
+
+<br/>
+
+<?php
+
 $doc = JFactory::getDocument();
 $doc->addScript(JURI::root().'components/com_realpin/includes/js/jquery.min.js');
 $doc->addScript(JURI::root().'components/com_realpin/includes/js/rp_js2.js');

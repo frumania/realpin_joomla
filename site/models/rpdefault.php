@@ -33,7 +33,7 @@ class realpinModelrpdefault extends JModelLegacy
 		$query="SELECT * FROM ".RP_TABLE." WHERE pinboard='".PINBOARD."' AND (sticky='1' OR created>=DATE_ADD(NOW(), INTERVAL -".LIFETIME." DAY)) AND published='1' ORDER BY sticky DESC, created DESC";
 
 		$db->setQuery( $query);
-		$db->query();
+		$db->execute();
 		$result = $db->getNumRows();
 
 		return $result;

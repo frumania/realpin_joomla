@@ -8,6 +8,8 @@
 
 defined('_JEXEC') or die('Restricted access');
 
+use Joomla\Utilities\ArrayHelper;
+
 class startControllermanagement extends startController
 {
 	
@@ -21,18 +23,18 @@ class startControllermanagement extends startController
 	
     function display($cachable = false, $urlparams = false)
 	{
-		JRequest::setVar( 'view', 'management' );
+		JFactory::getApplication()->input->set( 'view', 'management' );
 		
 		parent::display();
 	}
 	
 	function edit()
 	{
-		$rpname=JRequest::getVar( 'rpname' , '', 'REQUEST');
-		$pinboard=JRequest::getVar( 'pinboard' , '', 'REQUEST');
-		$community=JRequest::getVar( 'community' , '', 'REQUEST');
-	    $cid		= JRequest::getVar( 'cid', array(), 'post', 'array' );
-		JArrayHelper::toInteger( $cid );
+		$rpname=JFactory::getApplication()->input->get( 'rpname' , '', 'REQUEST');
+		$pinboard=JFactory::getApplication()->input->get( 'pinboard' , '', 'REQUEST');
+		$community=JFactory::getApplication()->input->get( 'community' , '', 'REQUEST');
+	    $cid		= JFactory::getApplication()->input->get('cid');
+		ArrayHelper::toInteger( $cid );
 		$cids = implode( ',', $cid );
         $this->setRedirect( 'index.php?option=com_realpin&controller=edit&task=edit&cid[]='.$cids.'&pinboard='.$pinboard.'&community='.$community.'&rpname='.$rpname);
 
@@ -51,8 +53,8 @@ class startControllermanagement extends startController
 			$msg.= JText::_( 'LANG_CON5' );
 		}
 	
-        $pinboard=JRequest::getVar( 'pinboard' , '', 'REQUEST');
-		$community=JRequest::getVar( 'community' , '', 'REQUEST');
+        $pinboard=JFactory::getApplication()->input->get( 'pinboard' , '', 'REQUEST');
+		$community=JFactory::getApplication()->input->get( 'community' , '', 'REQUEST');
 		
 		$this->setRedirect( 'index.php?option=com_realpin&controller=management&task=display&pinboard='.$pinboard.'&community='.$community);
 	}
@@ -60,8 +62,8 @@ class startControllermanagement extends startController
 	
 	function publish()
 	{
-		$pinboard=JRequest::getVar( 'pinboard' , '', 'REQUEST');
-		$community=JRequest::getVar( 'community' , '', 'REQUEST');
+		$pinboard=JFactory::getApplication()->input->get( 'pinboard' , '', 'REQUEST');
+		$community=JFactory::getApplication()->input->get( 'community' , '', 'REQUEST');
 		if($community==1)
         {
 		$check="community";
@@ -76,8 +78,8 @@ class startControllermanagement extends startController
 		// Initialize variables
 		$db			=& JFactory::getDBO();
 		$user		=& JFactory::getUser();
-		$cid		= JRequest::getVar( 'cid', array(), 'post', 'array' );
-		$task		= JRequest::getCmd( 'task' );
+		$cid		= JFactory::getApplication()->input->get('cid');
+		$task		= JFactory::getApplication()->input->get( 'task' );
 		$publish	= ($task == 'publish');
 		$n			= count( $cid );
 
@@ -85,7 +87,7 @@ class startControllermanagement extends startController
 			return JError::raiseWarning( 500, JText::_( 'LANG_CON6' ) );
 		}
 
-		JArrayHelper::toInteger( $cid );
+		ArrayHelper::toInteger( $cid );
 		$cids = implode( ',', $cid );
 		
 		$query = 'UPDATE '.$table.''
@@ -93,7 +95,7 @@ class startControllermanagement extends startController
 		. ' WHERE id IN ( '. $cids .' )'
 		;
 		$db->setQuery( $query );
-		if (!$db->query()) {
+		if (!$db->execute()) {
 			return JError::raiseWarning( 500, $db->getErrorMsg() );
 		}
 		$this->setMessage( JText::sprintf( $publish ? 'Items published' : 'Items unpublished', $n ) );
@@ -101,7 +103,7 @@ class startControllermanagement extends startController
 	
 	function cancel()
 	{	
-		$community=JRequest::getVar( 'community', '', 'post');
+		$community=JFactory::getApplication()->input->get( 'community', '', 'post');
 		$msg = JText::_( 'LANG_CON7' );
 		$this->setRedirect( 'index.php?option=com_realpin&controller=pinboards&community='.$community.'&task=display', $msg );
 	}

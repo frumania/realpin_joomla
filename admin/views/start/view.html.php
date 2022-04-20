@@ -19,6 +19,10 @@ jimport( 'joomla.application.component.view' );
  */
 class startViewstart extends JViewLegacy
 {
+	function assignRef($mystring, $param)
+	{
+		$this->{$mystring} = $param;
+	}
 
 	function display($tpl = null)
 	{

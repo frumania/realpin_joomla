@@ -16,12 +16,18 @@ class startViewedit extends JView
 	 * display method of Hello view
 	 * @return void
 	 **/
+
+	function assignRef($mystring, $param)
+	{
+		$this->{$mystring} = $param;
+	}
+	
 	function display($tpl = null)
 	{
 		$edit		= $this->get('Data');
-		$rpname=JRequest::getVar( 'rpname' , '', 'REQUEST');
-		$pinboard=JRequest::getVar( 'pinboard' , '', 'REQUEST');
-		$community=JRequest::getVar( 'community' , '', 'REQUEST');
+		$rpname=JFactory::getApplication()->input->get( 'rpname' , '', 'REQUEST');
+		$pinboard=JFactory::getApplication()->input->get( 'pinboard' , '', 'REQUEST');
+		$community=JFactory::getApplication()->input->get( 'community' , '', 'REQUEST');
 		
 		$model	  = $this->getModel();
 		$settings     = $model->getSettingsList();

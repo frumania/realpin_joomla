@@ -28,6 +28,11 @@ table tbody tr td.type_'.JText::_('LANG_OPT5').' {
 $doc->addStyleDeclaration( $style );
 ?>
 
+<div id="j-sidebar-container" class="span2">
+<?php echo JHtmlSidebar::render(); ?>
+</div>
+
+<br/>
 
 <form action="index.php" method="post" name="adminForm" id="adminForm">
 <table>
@@ -134,7 +139,7 @@ $doc->addStyleDeclaration( $style );
 	{
 		$row = &$this->items[$i];
 		
-		$published		= JHTML::_('grid.published', $row, $i );
+		$published		= JHTML::_('jgrid.published', $row->published, $i );
 		$checked 	= JHTML::_('grid.id',   $i, $row->id );
 	
 		$link 		= JRoute::_( 'index.php?option=com_realpin&controller=edit&pinboard='.$this->lists['pinboard'].'&community='.$this->lists['community'].'&rpname='.$this->lists['rpname'].'&task=edit&cid[]='. $row->id );

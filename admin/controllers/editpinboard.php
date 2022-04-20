@@ -21,9 +21,9 @@ class startControllereditpinboard extends startController
 
 	function edit()
 	{
-		JRequest::setVar( 'view', 'editpinboard' );
-		JRequest::setVar( 'layout', 'form'  );
-		JRequest::setVar('hidemainmenu', 1);
+		JFactory::getApplication()->input->set( 'view', 'editpinboard' );
+		JFactory::getApplication()->input->set( 'layout', 'form'  );
+		JFactory::getApplication()->input->set('hidemainmenu', 1);
 
 		parent::display();
 	}
@@ -33,7 +33,7 @@ class startControllereditpinboard extends startController
 		jimport('joomla.filesystem.file');
 		$model = $this->getModel('editpinboard');
 		
-		$post = JRequest::get('post');
+		$post = JFactory::getApplication()->input->post->getArray();
 		$config_name = $post['config_name'];
 		$config_desc = $post['config_desc'];
 		$published = $post['published'];
@@ -50,17 +50,19 @@ class startControllereditpinboard extends startController
 		  $sql = "INSERT INTO ".$table." SET ";
 		  $RowKeys = array_keys($row);
 		  $RowValues = array_values($row);
-			  for ($i=2;$i<count($RowKeys);$i+=1) 
-			  {
-			  if($RowKeys[$i]=="config_name"){$RowValues[$i]=$config_name;}
-			  if($RowKeys[$i]=="config_desc"){$RowValues[$i]=$config_desc;}	  
-			  if($RowKeys[$i]=="config_community"){$RowValues[$i]=$config_community;}  
-			  if($RowKeys[$i]=="published"){$RowValues[$i]=$published;}
-			  if ($i!=2) { $sql .= ", "; }
-			  $sql .= $RowKeys[$i] . " = '" . $RowValues[$i] . "'";
-			  }
+
+			for ($i=2;$i<count($RowKeys);$i+=1) 
+			{
+			if($RowKeys[$i]=="config_name"){$RowValues[$i]=$config_name;}
+			if($RowKeys[$i]=="config_desc"){$RowValues[$i]=$config_desc;}	  
+			if($RowKeys[$i]=="config_community"){$RowValues[$i]=$config_community;}  
+			if($RowKeys[$i]=="published"){$RowValues[$i]=$published;}
+			if ($i!=2) { $sql .= ", "; }
+			$sql .= $RowKeys[$i] . " = '" . $RowValues[$i] . "'";
+			}
+
 		  $db->setQuery($sql);
-		  $db->query();
+		  $db->execute();
 		
 		  $this->setRedirect( 'index.php?option=com_realpin&controller=pinboards&task=display', $msg );
 

@@ -18,13 +18,18 @@ jimport( 'joomla.application.component.view' );
  */
 class startViewpinboards extends JViewLegacy
 {
+	function assignRef($mystring, $param)
+	{
+		$this->{$mystring} = $param;
+	}
+	
 	/**
 	 * Hellos view display method
 	 * @return void
 	 **/
 	function display($tpl = null)
 	{
-		$community = JRequest::getVar('community',0,'REQUEST');
+		$community = JFactory::getApplication()->input->get('community',0,'REQUEST');
 		
 		JToolBarHelper::title(JText::_( 'RealPin: ').JText::_('LANG_BUTTON4'), 'generic.png' );
 		
@@ -52,14 +57,14 @@ class startViewpinboards extends JViewLegacy
 		
 		$table	= '#__realpin_settings';	
 
-        $uri = JFactory::getURI();
+        $uri = JUri::getInstance();
         $query = $uri->getQuery();
 		$db					= JFactory::getDBO();
 		$filter_order		= $mainframe->getUserStateFromRequest( $query."filter_order",		'filter_order',		'm.config_updated',	'cmd' );
 		$filter_order_Dir	= $mainframe->getUserStateFromRequest( $query."filter_order_Dir",	'filter_order_Dir',	'DESC',		'word' );
 		$filter_state		= $mainframe->getUserStateFromRequest( $query."filter_state",		'filter_state',		'',		'word' );
 		$search				= $mainframe->getUserStateFromRequest( $query."search",			'search',			'',		'string' );
-		$search				= JString::strtolower( $search );
+		$search				= strtolower( $search );
 
         $limit		= $mainframe->getUserStateFromRequest( 'global.list.limit', 'limit', 50, 'int' );
 		$limitstart	= $mainframe->getUserStateFromRequest( $option.'.limitstart', 'limitstart', 0, 'int' );
@@ -107,9 +112,13 @@ class startViewpinboards extends JViewLegacy
 		$db->setQuery( $query, $pagination->limitstart, $pagination->limit );
 		$rows = $db->loadObjectList();
 		
-		if ($db->getErrorNum())
+		try
 		{
-			echo $db->stderr();
+			$rows = $db->loadObjectList();
+		}
+		catch (Exception $e)
+		{
+			$app->enqueueMessage(JText::_($e->getMessage()), 'error');
 			return false;
 		}
 

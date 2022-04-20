@@ -8,6 +8,16 @@
 
 defined('_JEXEC') or die('Restricted access');
 
+?>
+
+<div id="j-sidebar-container" class="span2">
+<?php echo JHtmlSidebar::render(); ?>
+</div>
+
+<br/>
+
+<?php
+
 //Thanks to Ilya Rudev <www <at> polar-lights <dot> com> (Polar Lights Labs)
 function rsa_encrypt ($m,  $e,  $n) {
     $asci = array ();
@@ -64,7 +74,7 @@ $db	= JFactory::getDBO();
 $table="#__realpin_settings";
 $query = "SELECT license FROM ".$table." WHERE config_id = '1'";
 $db->setQuery($query);
-//$db->query();
+//$db->execute();
 $license = $db->loadResult();
 if($license==""){$license=="0";}
 
@@ -74,7 +84,7 @@ define('LICENSED', $licensed);
 
 $query = "SELECT * FROM ".$table." WHERE config_community = '0'";
 $db->setQuery($query);
-$db->query();
+$db->execute();
 $num = $db->getNumRows();
 
 

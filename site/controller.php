@@ -25,21 +25,21 @@ define('RP_VERSION', $xml->version);
 
 define('EMPTY_STRING', '');
 define('LANG', strtolower($lang));
-define('VIEW', JRequest::getVar( 'view','','GET'));
+define('VIEW', JFactory::getApplication()->input->get( 'view','','GET'));
 define('ROOT', JURI::base().'components/com_realpin/includes');
 define('USERNAME_LOGIN', sanitize($user->username));
 define('USERID', $user->id);
-define('RPID', JRequest::getInt( 'rpitem',0,'GET'));
+define('RPID', JFactory::getApplication()->input->get( 'rpitem',0,'GET'));
 
 if(!empty($_GET['fullscreen']))
 {
-	define('FULLSCREEN', JRequest::getVar( 'fullscreen','0','GET'));
+	define('FULLSCREEN', JFactory::getApplication()->input->get( 'fullscreen','0','GET'));
 }
 		
 $language = JFactory::getLanguage();
 $language->load('com_realpin');
 
-$debug=JRequest::getVar( 'rp_debug','0','GET');
+$debug=JFactory::getApplication()->input->get( 'rp_debug','0','GET');
 define('DEBUG', $debug);
 
 if(version_compare(JVERSION,'1.6.0','ge'))
@@ -72,6 +72,10 @@ else
 
 class realpinController extends JControllerLegacy
 {
+	function assignRef($mystring, $param)
+	{
+		$this->{$mystring} = $param;
+	}
 
 	function display($cachable = false, $urlparams = Array())
 	{
@@ -80,10 +84,10 @@ class realpinController extends JControllerLegacy
 
 	$this->def();
 		
-	//define('RPTEMPLATE', strtolower(JRequest::getVar('rptemplate',rand(1,3),'GET')));
-	define('SITE', strtolower(JRequest::getVar( 'user','','GET')));
+	//define('RPTEMPLATE', strtolower(JFactory::getApplication()->input->get('rptemplate',rand(1,3),'GET')));
+	define('SITE', strtolower(JFactory::getApplication()->input->get( 'user','','GET')));
 	if(SITE!=null){$this->setRedirect('index.php?option=com_realpin_hosting&user='.SITE);}
-	//JRequest::setVar( 'tmpl','realpin');
+	//JFactory::getApplication()->input->set( 'tmpl','realpin');
 	
 	switch (VIEW) {
     case 'rpdefault':
@@ -91,7 +95,7 @@ class realpinController extends JControllerLegacy
 	        $view = new realpinViewrpdefault();	
 	        $model = &$this->getModel('rpdefault');
 			$view->setModel($model, true);
-			if(COMMUNITY==1){JRequest::setVar( 'tmpl','realpin');}
+			if(COMMUNITY==1){JFactory::getApplication()->input->set( 'tmpl','realpin');}
         break;
     case 'rpparameter':
         	require_once (JPATH_COMPONENT.DS.'views'.DS.'rpparameter'.DS.'view.html.php');
@@ -104,7 +108,7 @@ class realpinController extends JControllerLegacy
 	        $view = new realpinViewrpdefault();	
 	        $model = $this->getModel('rpdefault');
 			$view->setModel($model, true);
-			if(COMMUNITY==1){JRequest::setVar( 'tmpl','realpin');}
+			if(COMMUNITY==1){JFactory::getApplication()->input->set( 'tmpl','realpin');}
 	}
     
 	$view->assignRef('vars'  , $vars);
@@ -167,7 +171,7 @@ class realpinController extends JControllerLegacy
 					}
 				}
 				
-				$message.=JText::_('LANG_MAIL8').': <a href="'.$siteURL.'index.php?option=com_realpin&pinboard='.PINBOARD.'&Itemid='.JRequest::getInt( 'Itemid',0,'REQUEST').'">'.JText::_('LANG_MAIL7').'</a>';
+				$message.=JText::_('LANG_MAIL8').': <a href="'.$siteURL.'index.php?option=com_realpin&pinboard='.PINBOARD.'&Itemid='.JFactory::getApplication()->input->get( 'Itemid',0,'REQUEST').'">'.JText::_('LANG_MAIL7').'</a>';
 				
 			   $mailer->setSubject($subject);
 			   $mailer->isHTML(true);
@@ -189,7 +193,7 @@ class realpinController extends JControllerLegacy
 	require_once(JPATH_COMPONENT.DS.'includes'.DS.'ismobile.php');
     $detect = new MobileDetect();
 	
-	$rp_mobile = JRequest::getVar( 'rp_mobile','','GET');
+	$rp_mobile = JFactory::getApplication()->input->get( 'rp_mobile','','GET');
 	if($rp_mobile == "1")
 	{define('RP_MOBILE', true);}
 	elseif($rp_mobile == "0")
@@ -199,7 +203,7 @@ class realpinController extends JControllerLegacy
 	
 	if (RP_MOBILE) {
    		 define('FULLSCREEN', '1');
-		 JRequest::setVar( 'tmpl','realpin');
+		 JFactory::getApplication()->input->set( 'tmpl','realpin');
 		 define('BORDER_BACKGROUND', 'transparent');
     }
 	
@@ -207,7 +211,7 @@ class realpinController extends JControllerLegacy
 	if(DEBUG=="2")
 	{
 	define('JQUERY_COMPATIBILITY', '1');
-	JRequest::setVar( 'tmpl','realpin');
+	JFactory::getApplication()->input->set( 'tmpl','realpin');
 	
 	echo "DEBUG-INFO:";
 	echo "<br/>";
@@ -238,7 +242,7 @@ class realpinController extends JControllerLegacy
 		echo "<br/>";
 	}		
 		
-	$pinboard=strtolower(JRequest::getInt('pinboard',5,'REQUEST'));
+	$pinboard=strtolower(JFactory::getApplication()->input->get('pinboard',5,'REQUEST'));
 	define('PINBOARD',$pinboard);
 	
 	$import = preg_replace ("/SITE/", PINBOARD, JText::_('LANG_NOPINBOARD'));
@@ -286,7 +290,7 @@ class realpinController extends JControllerLegacy
 	
 	foreach ($isglobal as $key=>$value )
 	{
-    if($value==""){$db	= JFactory::getDBO(); $db->setQuery("UPDATE `".RP_SETTINGS_TABLE."` SET `$key` = 'true' WHERE config_name = 'default_private_global' "); $db->query();}	
+    if($value==""){$db	= JFactory::getDBO(); $db->setQuery("UPDATE `".RP_SETTINGS_TABLE."` SET `$key` = 1 WHERE config_name = 'default_private_global' "); $db->execute();}	
 	if($value=="true"){if(!defined($key)){@define(strtoupper($key),  $globalsettings[$key]);}}
 	}	
 	foreach ( $settings as $key=>$value )
@@ -326,7 +330,7 @@ class realpinController extends JControllerLegacy
 	$dating=date("Y-m-d H:i:s");
 	$query = "UPDATE #__realpin_settings Set config_updated = '$dating' WHERE config_id='".PINBOARD."'";
 	$db->setQuery($query);		
-	$db->query();
+	$db->execute();
 	}
 		
 	function loaddata()
@@ -345,11 +349,11 @@ class realpinController extends JControllerLegacy
 	$size_g_x=$start_g_x;
 	$size_g_y=$start_g_y;
 	
-	$page=JRequest::getInt( 'rp_page' , 0, 'POST');
-	$itemsperpage=JRequest::getInt( 'rp_itemsperpage' , 10, 'POST');
+	$page=JFactory::getApplication()->input->get( 'rp_page' , 0, 'POST');
+	$itemsperpage=JFactory::getApplication()->input->get( 'rp_itemsperpage' , 10, 'POST');
 	
     $db->setQuery("SELECT * FROM ".RP_TABLE." WHERE pinboard='".PINBOARD."' AND (sticky='1' OR created>=DATE_ADD(NOW(), INTERVAL -".LIFETIME." DAY)) AND published='1' ORDER BY sticky DESC, created DESC LIMIT ".$page*$itemsperpage.",".($itemsperpage).";");
-	//$db->query();
+	//$db->execute();
 	$data = array();
 	$index=0;
 	if( $rows = $db->loadObjectList() )
@@ -497,9 +501,9 @@ class realpinController extends JControllerLegacy
 	    global $mainframe;
 	    $db		= JFactory::getDBO();
 
-		$x=JRequest::getInt( 'rp_x' , 0, 'POST');
-		$y=JRequest::getInt( 'rp_y' , 0, 'POST');
-		$id=JRequest::getInt( 'rp_id' , 0, 'POST');
+		$x=JFactory::getApplication()->input->get( 'rp_x' , 0, 'POST');
+		$y=JFactory::getApplication()->input->get( 'rp_y' , 0, 'POST');
+		$id=JFactory::getApplication()->input->get( 'rp_id' , 0, 'POST');
 		
 		require_once (JPATH_COMPONENT.DS.'views'.DS.'rpdefault'.DS.'view.ajax.php');
 		$view = new realpinViewajax();
@@ -509,7 +513,7 @@ class realpinController extends JControllerLegacy
 				if($x<80 and $y<80){$x=120;$y=100;}
 				$query = "UPDATE ".RP_TABLE." Set xPos = '$x',yPos = '$y' WHERE id='$id'";
 				$db->setQuery($query);		
-				$db->query();
+				$db->execute();
 
 		        $view->display(JText::_('LANG_NOT2'));
 		 }
@@ -527,9 +531,9 @@ class realpinController extends JControllerLegacy
 	function videoEmbed()
 	{
 	
-	$url=stripslashes(JRequest::getVar( 'rp_video_url' , '', 'REQUEST'));
-	$width=stripslashes(JRequest::getVar( 'rp_video_width' , '', 'REQUEST'));
-	$height=stripslashes(JRequest::getVar( 'rp_video_height' , '', 'REQUEST'));
+	$url=stripslashes(JFactory::getApplication()->input->get( 'rp_video_url' , '', 'REQUEST'));
+	$width=stripslashes(JFactory::getApplication()->input->get( 'rp_video_width' , '', 'REQUEST'));
+	$height=stripslashes(JFactory::getApplication()->input->get( 'rp_video_height' , '', 'REQUEST'));
 	
 	$AE = new AutoEmbed();
 	
@@ -558,7 +562,7 @@ class realpinController extends JControllerLegacy
 	
 	function checkyoutube() 
 	{
-	$url=stripslashes(JRequest::getVar( 'rp_url' , '', 'POST'));
+	$url=stripslashes(JFactory::getApplication()->input->get( 'rp_url' , '', 'POST'));
 	
 		if($this->isValidYoutubeURL($url))
 		{
@@ -654,8 +658,8 @@ class realpinController extends JControllerLegacy
 	   $db		= JFactory::getDBO();
 	   jimport('joomla.filesystem.file');
 
-	   $id=JRequest::getInt( 'rp_id' , 0, 'POST');
-	   $author_id=JRequest::getInt( 'rp_author_id' , 0, 'POST');
+	   $id=JFactory::getApplication()->input->get( 'rp_id' , 0, 'POST');
+	   $author_id=JFactory::getApplication()->input->get( 'rp_author_id' , 0, 'POST');
 	   $user = JFactory::getUser();
 	   
 	   if (!$user->guest)
@@ -684,7 +688,7 @@ class realpinController extends JControllerLegacy
 				  
 				$query = "DELETE FROM ".RP_TABLE." WHERE id='$id'";
 				$db->setQuery( $query );
-				if (!$db->query()) 
+				if (!$db->execute()) 
 				{
 				$msg=$db->getErrorMsg();
 				$data= array ('success'=>false,'message'=>$msg);
@@ -727,12 +731,12 @@ class realpinController extends JControllerLegacy
 		{
 				
 				$vars = new stdClass();
-				$vars->text=strip_tags(addslashes(remove_all_special(stripslashes(JRequest::getVar( 'rp_text' , '', 'POST')))));
-				$vars->title=strip_tags(addslashes(remove_all_special(stripslashes(JRequest::getVar( 'rp_title' , '', 'POST')))));
-				$vars->author=strip_tags(addslashes(remove_all_special(stripslashes(JRequest::getVar( 'rp_author' , '', 'POST')))));
-				$vars->author_id=strip_tags(addslashes(remove_all_special(stripslashes(JRequest::getVar( 'rp_author_id' , '', 'POST')))));
-				$vars->url=strip_tags(addslashes(remove_all_special(stripslashes(JRequest::getVar( 'rp_url' , '', 'POST')))));
-				$vars->sticky=strip_tags(addslashes(remove_all_special(stripslashes(JRequest::getVar( 'rp_sticky' , '', 'POST')))));
+				$vars->text=strip_tags(addslashes(remove_all_special(stripslashes(JFactory::getApplication()->input->get( 'rp_text' , '', 'POST')))));
+				$vars->title=strip_tags(addslashes(remove_all_special(stripslashes(JFactory::getApplication()->input->get( 'rp_title' , '', 'POST')))));
+				$vars->author=strip_tags(addslashes(remove_all_special(stripslashes(JFactory::getApplication()->input->get( 'rp_author' , '', 'POST')))));
+				$vars->author_id=strip_tags(addslashes(remove_all_special(stripslashes(JFactory::getApplication()->input->get( 'rp_author_id' , '', 'POST')))));
+				$vars->url=strip_tags(addslashes(remove_all_special(stripslashes(JFactory::getApplication()->input->get( 'rp_url' , '', 'POST')))));
+				$vars->sticky=strip_tags(addslashes(remove_all_special(stripslashes(JFactory::getApplication()->input->get( 'rp_sticky' , '', 'POST')))));
 				
 				$xPos=rand(50,TOTAL_WIDTH-200);
 				$yPos=rand(50,TOTAL_HEIGHT-200);
@@ -749,16 +753,17 @@ class realpinController extends JControllerLegacy
 						$vars->urlnew=$timestamp."_".$vars->url;
 						
 					    $dating=date("Y-m-d H:i:s");
+						$expires='0000-00-00 00:00:00';
 						
 						if($vars->sticky=="true"){$sticky=1;}else{$sticky=0;}
 						
 						if (APPROVAL == "2" or (APPROVAL=="1" and USER<18)){$pub=0;}else{$pub=1;}
-						$sqls = array("ALTER TABLE ".RP_TABLE." AUTO_INCREMENT = 1","INSERT INTO ".RP_TABLE." (xPos, yPos, type, text, url, pw, title, author, created, expires, published, sticky, pinboard, params, author_link, author_email, author_id) VALUES ('$xPos','$yPos', 'pic', '$vars->text', '$vars->urlnew','','$vars->title','$vars->author','$dating','','$pub','$sticky','".PINBOARD."','','','','$vars->author_id')");
+						$sqls = array("ALTER TABLE ".RP_TABLE." AUTO_INCREMENT = 1","INSERT INTO ".RP_TABLE." (xPos, yPos, type, text, url, pw, title, author, created, expires, published, sticky, pinboard, params, author_link, author_email, author_id, rating) VALUES ('$xPos','$yPos', 'pic', '$vars->text', '$vars->urlnew','','$vars->title','$vars->author','$dating','$expires','$pub','$sticky','".PINBOARD."','','','','$vars->author_id','')");
 						
 						foreach($sqls as $sql) 
 						{
 							$db->setQuery($sql);
-							$db->query();
+							$db->execute();
 						}
 						
 						$obj=array();
@@ -820,10 +825,10 @@ class realpinController extends JControllerLegacy
 		{
 	
 	    $vars = new stdClass();
-		$vars->text=strip_tags(addslashes(remove_all_special(stripslashes(JRequest::getVar( 'rp_text' , '', 'POST')))));
-		$vars->author=strip_tags(addslashes(remove_all_special(stripslashes(JRequest::getVar( 'rp_author' , '', 'POST')))));
-		$vars->author_id=strip_tags(addslashes(remove_all_special(stripslashes(JRequest::getVar( 'rp_author_id' , '', 'POST')))));
-		$vars->sticky=strip_tags(addslashes(remove_all_special(stripslashes(JRequest::getVar( 'rp_sticky' , '', 'POST')))));
+		$vars->text=strip_tags(addslashes(remove_all_special(stripslashes(JFactory::getApplication()->input->get( 'rp_text' , '', 'POST')))));
+		$vars->author=strip_tags(addslashes(remove_all_special(stripslashes(JFactory::getApplication()->input->get( 'rp_author' , '', 'POST')))));
+		$vars->author_id=strip_tags(addslashes(remove_all_special(stripslashes(JFactory::getApplication()->input->get( 'rp_author_id' , '', 'POST')))));
+		$vars->sticky=strip_tags(addslashes(remove_all_special(stripslashes(JFactory::getApplication()->input->get( 'rp_sticky' , '', 'POST')))));
 		
 			$xPos=rand(50,TOTAL_WIDTH-250);
 			$yPos=rand(50,TOTAL_HEIGHT-200);
@@ -831,16 +836,17 @@ class realpinController extends JControllerLegacy
 			if($vars->text!='')
 			{
 			$dating= date("Y-m-d H:i:s");
+			$expires='0000-00-00 00:00:00';
 			
 			if($vars->sticky=="true"){$sticky=1;}else{$sticky=0;}
 			
 			if (APPROVAL == "2" or (APPROVAL=="1" and USER<18)){$pub=0;}else{$pub=1;}
-			$sqls = array("ALTER TABLE ".RP_TABLE." AUTO_INCREMENT = 1","INSERT INTO ".RP_TABLE." (xPos, yPos, type, text, url, pw, title, author, created, expires, published, sticky, pinboard, params, author_link, author_email, author_id) VALUES ('$xPos','$yPos', 'postit', '$vars->text', '','','','$vars->author','$dating','','$pub','$sticky','".PINBOARD."','','','','$vars->author_id')");
+			$sqls = array("ALTER TABLE ".RP_TABLE." AUTO_INCREMENT = 1","INSERT INTO ".RP_TABLE." (xPos, yPos, type, text, url, pw, title, author, created, expires, published, sticky, pinboard, params, author_link, author_email, author_id, rating) VALUES ('$xPos','$yPos', 'postit', '$vars->text', '','','','$vars->author','$dating','$expires','$pub','$sticky','".PINBOARD."','','','','$vars->author_id','')");
 					
 			foreach($sqls as $sql) 
 			{
 				$db->setQuery($sql);
-				$db->query();
+				$db->execute();
 			}
 			
 			$obj=array();
@@ -891,12 +897,12 @@ class realpinController extends JControllerLegacy
 		
 	    $vars = new stdClass();
 		$vars->embed="false";
-		$vars->text=strip_tags(addslashes(remove_all_special(stripslashes(JRequest::getVar( 'rp_text' , '', 'POST')))));
-		$vars->title=strip_tags(addslashes(remove_all_special(stripslashes(JRequest::getVar( 'rp_title' , '', 'POST')))));
-		$vars->author=strip_tags(addslashes(remove_all_special(stripslashes(JRequest::getVar( 'rp_author' , '', 'POST')))));
-		$vars->author_id=strip_tags(addslashes(remove_all_special(stripslashes(JRequest::getVar( 'rp_author_id' , '', 'POST')))));
-		$vars->url=strip_tags(addslashes(remove_all_special(stripslashes(JRequest::getVar( 'rp_url' , '', 'POST')))));
-		$vars->sticky=strip_tags(addslashes(remove_all_special(stripslashes(JRequest::getVar( 'rp_sticky' , '', 'POST')))));
+		$vars->text=strip_tags(addslashes(remove_all_special(stripslashes(JFactory::getApplication()->input->get( 'rp_text' , '', 'POST')))));
+		$vars->title=strip_tags(addslashes(remove_all_special(stripslashes(JFactory::getApplication()->input->get( 'rp_title' , '', 'POST')))));
+		$vars->author=strip_tags(addslashes(remove_all_special(stripslashes(JFactory::getApplication()->input->get( 'rp_author' , '', 'POST')))));
+		$vars->author_id=strip_tags(addslashes(remove_all_special(stripslashes(JFactory::getApplication()->input->get( 'rp_author_id' , '', 'POST')))));
+		$vars->url=strip_tags(addslashes(remove_all_special(stripslashes(JFactory::getApplication()->input->get( 'rp_url' , '', 'POST')))));
+		$vars->sticky=strip_tags(addslashes(remove_all_special(stripslashes(JFactory::getApplication()->input->get( 'rp_sticky' , '', 'POST')))));
 		
 		$xPos=rand(50,TOTAL_WIDTH-200);
 		$yPos=rand(50,TOTAL_HEIGHT-200);
@@ -923,17 +929,18 @@ class realpinController extends JControllerLegacy
 			if($go==true)
 			{
 				$dating= date("Y-m-d H:i:s");
+				$expires='0000-00-00 00:00:00';
 				
 				if($vars->sticky=="true"){$sticky=1;}
 				else{$sticky=0;}
 				
 				if (APPROVAL == "2" or (APPROVAL=="1" and USER<18)){$pub=0;}else{$pub=1;}
-				$sqls = array("ALTER TABLE ".RP_TABLE." AUTO_INCREMENT = 1","INSERT INTO ".RP_TABLE." (xPos, yPos, type, text, url, pw, title, author, created, expires, published, sticky, pinboard, params, author_link, author_email, author_id) VALUES ('$xPos','$yPos', 'youtube', '$vars->text', '$vars->url','','$vars->title','$vars->author','$dating','','$pub','$sticky','".PINBOARD."','','','','$vars->author_id')");
+				$sqls = array("ALTER TABLE ".RP_TABLE." AUTO_INCREMENT = 1","INSERT INTO ".RP_TABLE." (xPos, yPos, type, text, url, pw, title, author, created, expires, published, sticky, pinboard, params, author_link, author_email, author_id, rating) VALUES ('$xPos','$yPos', 'youtube', '$vars->text', '$vars->url','','$vars->title','$vars->author','$dating','$expires','$pub','$sticky','".PINBOARD."','','','','$vars->author_id','')");
 					
 					foreach($sqls as $sql) 
 					{
 						$db->setQuery($sql);
-						$db->query();
+						$db->execute();
 					}
 				
 				$obj=array();

@@ -18,18 +18,22 @@ jimport( 'joomla.application.component.view' );
  */
 class realpinViewrpparameter extends JViewLegacy
 {
+	function assignRef($mystring, $param)
+	{
+		$this->{$mystring} = $param;
+	}
 	
 function display($tpl = null)
 	{
-		$rpname=JRequest::getVar( 'rpname' , 'global', 'REQUEST');
+		$rpname=JFactory::getApplication()->input->get( 'rpname' , 'global', 'REQUEST');
 		//JToolBarHelper::title(JText::_( 'RealPin: ').JText::_('LANG_BUTTON3')." (".$rpname.")", 'generic.png' );
 		//JToolBarHelper::save();
 		//JToolBarHelper::cancel( 'cancel', 'Close' );
 		//JToolBarHelper::custom( 'makeDefault', 'default.png', 'icon over', 'Default', false, false );
 		
-		$community=JRequest::getVar( 'community', '', 'REQUEST');
-		$pinboard=JRequest::getInt( 'pinboard', 5, 'REQUEST');
-		$isglobal=JRequest::getVar( 'global', 'true', 'REQUEST');
+		$community=JFactory::getApplication()->input->get( 'community', '', 'REQUEST');
+		$pinboard=JFactory::getApplication()->input->get( 'pinboard', 5, 'REQUEST');
+		$isglobal=JFactory::getApplication()->input->get( 'global', 'true', 'REQUEST');
 		$model = $this->getModel();
 	
 		if($community=="1")

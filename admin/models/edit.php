@@ -26,10 +26,12 @@ class startModeledit extends JModelLegacy
 	{
 		parent::__construct();
 
-		$array = JRequest::getVar('cid',  0, '', 'array');
+		//JTable::addIncludePath(JPATH_ADMINISTRATOR . '/components/com_realpin/tables');
+
+		$array = JFactory::getApplication()->input->get('cid',  0, '', 'array');
 		
-	    $pinboard=JRequest::getVar( 'pinboard' , '', 'REQUEST');
-		$community=JRequest::getVar( 'community' , '', 'REQUEST');
+	    $pinboard=JFactory::getApplication()->input->get( 'pinboard' , '', 'REQUEST');
+		$community=JFactory::getApplication()->input->get( 'community' , '', 'REQUEST');
 		
 		if($community==1)
         {
@@ -118,7 +120,7 @@ class startModeledit extends JModelLegacy
 	{
 		$row =& $this->getTable();
 
-		//$data = JRequest::get( 'post' );
+		//$data = JFactory::getApplication()->input->get( 'post' );
 
 		// Bind the form fields to the hello table
 		if (!$row->bind($data)) {
@@ -150,7 +152,7 @@ class startModeledit extends JModelLegacy
 	function delete_pics()
 	{
 	
-	$cids = JRequest::getVar( 'cid', array(0), 'post', 'array' );
+	$cids = JFactory::getApplication()->input->get( 'cid', array(0), 'post', 'array' );
 	$db	= JFactory::getDBO();
 	$vars = new stdClass();
 	jimport('joomla.filesystem.file');
@@ -179,8 +181,7 @@ class startModeledit extends JModelLegacy
 	 
 	function delete()
 	{
-		$cids = JRequest::getVar( 'cid', array(), 'post', 'array' );
-		//$cids = JRequest::getVar( 'cid', array(0), 'post', 'array' );
+		$cids = JFactory::getApplication()->input->post->get('cid');
 
 		$row = &$this->getTable();
 
@@ -198,7 +199,7 @@ class startModeledit extends JModelLegacy
 	
 	function delete_thumb($post)
 	{
-		//$id = JRequest::getVar( 'id', 'post');
+		//$id = JFactory::getApplication()->input->get( 'id', 'post');
 		$id=$post;
 		$db	= JFactory::getDBO();
 		$vars = new stdClass();

@@ -22,7 +22,7 @@ class startModeleditpinboard extends JModelLegacy
 	{
 		parent::__construct();
 
-		$array = JRequest::getVar('cid',  0, '', 'array');
+		$array = JFactory::getApplication()->input->get('cid',  0, '', 'array');
 		
 		$table = '#__realpin_settings';
 		
@@ -88,7 +88,7 @@ class startModeleditpinboard extends JModelLegacy
 	{
 		$row = $this->getTable();
 
-		//$data = JRequest::get( 'post' );
+		//$data = JFactory::getApplication()->input->get( 'post' );
 
 		// Bind the form fields to the hello table
 		if (!$row->bind($data)) {
@@ -120,7 +120,7 @@ class startModeleditpinboard extends JModelLegacy
 	 
 	function delete()
 	{
-		$cids = JRequest::getVar( 'cid', array(0), 'post', 'array' );
+		$cids = JFactory::getApplication()->input->get( 'cid', array(0), 'post', 'array' );
 
 		$row = $this->getTable();
 

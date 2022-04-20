@@ -11,6 +11,15 @@ defined('_JEXEC') or die('Restricted access');
 jimport('joomla.filesystem.folder');
 jimport('joomla.filesystem.file');
 
+?>
+
+<div id="j-sidebar-container" class="span2">
+<?php echo JHtmlSidebar::render(); ?>
+</div>
+
+<br/>
+
+<?php
 
 foreach ( $this->items as $key=>$value )
 { 
@@ -171,7 +180,7 @@ $Num_last=substr($Num_last,0,10);
 </table>
 </div>
 
-           
+<br/>        
 
 <?php
 echo "<div>"; echo "RealPin v.".VERSION." - ".JText::_( 'LANG_COPYRIGHT' ); echo "</div>";

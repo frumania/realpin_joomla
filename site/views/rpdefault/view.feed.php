@@ -28,9 +28,9 @@ class realpinViewfeed extends JViewLegacy
 
 		$document	=& JFactory::getDocument();
 		
-		$mytype = strtolower(JRequest::getVar('rp_type','pic','REQUEST'));
+		$mytype = strtolower(JFactory::getApplication()->input->get('rp_type','pic','REQUEST'));
 		// Get some data from the model
-		//JRequest::setVar('limit', $app->getCfg('feed_limit'));
+		//JFactory::getApplication()->input->set('limit', $app->getCfg('feed_limit'));
 
 		foreach ($pin_data as $row)
 		{

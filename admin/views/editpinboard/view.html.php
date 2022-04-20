@@ -16,6 +16,11 @@ class startVieweditpinboard extends JViewLegacy
 	 * display method of Hello view
 	 * @return void
 	 **/
+	function assignRef($mystring, $param)
+	{
+		$this->{$mystring} = $param;
+	}
+
 	function display($tpl = null)
 	{
 		$edit		= $this->get('Data');

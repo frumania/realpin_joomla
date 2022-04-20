@@ -133,9 +133,7 @@ function mo ($g,  $l) {
 
 
 function stripper($stringvar){
-    if (1 == get_magic_quotes_gpc()){
-        $stringvar = stripslashes($stringvar);
-    }
+    $stringvar = stripslashes($stringvar);
     return $stringvar;
 }
 
@@ -156,8 +154,8 @@ function foxy_utf8_to_nce($utf = EMPTY_STRING)
 
   $html = EMPTY_STRING;
   for($str_pos = 0; $str_pos < strlen($utf); $str_pos++) {
-    $old_chr = $utf{$str_pos};
-    $old_val = ord( $utf{$str_pos} );
+    $old_chr = $utf[$str_pos];
+    $old_val = ord( $utf[$str_pos] );
     $new_val = 0;
 
     $utf8_marker = 0;
@@ -176,19 +174,19 @@ function foxy_utf8_to_nce($utf = EMPTY_STRING)
     }
 
     // marker found: collect following bytes
-    if($utf8_marker > 1 and isset( $utf{$str_pos + 1} ) ) {
+    if($utf8_marker > 1 and isset( $utf[$str_pos + 1] ) ) {
       $str_off = 0;
       $new_val = $old_val & (127 >> $utf8_marker);
       for($byte_ctr = $utf8_marker; $byte_ctr > 1; $byte_ctr--) {
 
         // check if following chars are UTF8 additional data blocks
         // UTF8 and ord() > 127
-        if( (ord($utf{$str_pos + 1}) & 192) == 128 ) {
+        if( (ord($utf[$str_pos + 1]) & 192) == 128 ) {
           $new_val = $new_val << 6;
           $str_off++;
           // no need for Addition, bitwise OR is sufficient
           // 63: more UTF8-bytes; 0011 1111
-          $new_val = $new_val | ( ord( $utf{$str_pos + $str_off} ) & 63 );
+          $new_val = $new_val | ( ord( $utf[$str_pos + $str_off] ) & 63 );
         }
         // no UTF8, but ord() > 127
         // nevertheless convert first char to NCE
@@ -554,12 +552,12 @@ function create_thumb_jpg_kl($url,$title)
 		
 			$altesBild=imagecreatefromjpeg($pic);
 			$border_color = PIC_BORDER_COLOR;
-			$bordercolor = imagecolorallocate($neuesBild, hexdec('0x' . $border_color{0} . $border_color{1}), hexdec('0x' . $border_color{2} . $border_color{3}), hexdec('0x' . $border_color{4} . $border_color{5}));
+			$bordercolor = imagecolorallocate($neuesBild, hexdec('0x' . $border_color[0] . $border_color[1]), hexdec('0x' . $border_color[2] . $border_color[3]), hexdec('0x' . $border_color[4] . $border_color[5]));
 			imagefilledrectangle($neuesBild,0,0,$img_adj_width,$img_adj_height,$bordercolor);
 			imagecopyresampled($neuesBild,$altesBild,$border,$border,0,0,$neueBreite,$neueHoehe,$breite,$hoehe);
 			$title=stripper($title);
 			$color = PIC_FONT_COLOR;
-			$textcolor = imagecolorallocate($neuesBild, hexdec('0x' . $color{0} . $color{1}), hexdec('0x' . $color{2} . $color{3}), hexdec('0x' . $color{4} . $color{5}));
+			$textcolor = imagecolorallocate($neuesBild, hexdec('0x' . $color[0] . $color[1]), hexdec('0x' . $color[2] . $color[3]), hexdec('0x' . $color[4] . $color[5]));
 			
 			if($title!="" and $title!="-")
 			{

@@ -16,7 +16,7 @@ require_once(JPATH_COMPONENT.DS.'controller.php');
 
 $controller = new realpinController();
 
-$controller->execute(JRequest::getCmd('task'));
+$controller->execute(JFactory::getApplication()->input->get('task'));
 
 $controller->redirect();
 ?>

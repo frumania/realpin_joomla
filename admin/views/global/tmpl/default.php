@@ -8,6 +8,16 @@
 
 defined('_JEXEC') or die('Restricted access');
 
+?>
+
+<div id="j-sidebar-container" class="span2">
+<?php echo JHtmlSidebar::render(); ?>
+</div>
+
+<br/>
+
+<?php
+
 function listfiles($dir)
 {
 $read_ordner_dir = opendir($dir);
@@ -172,7 +182,7 @@ $table="#__realpin_settings";
 if($this->community==0){$query = "SELECT license FROM ".$table." WHERE config_id = '1'";}
 if($this->community==1){$query = "SELECT license FROM ".$table." WHERE config_id = '".$this->pinboard."'";}
 $db->setQuery($query);
-//$db->query();
+//$db->execute();
 //var_dump($db->loadResultArray());
 $license = $db->loadResult();
 

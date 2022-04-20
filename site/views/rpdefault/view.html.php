@@ -12,6 +12,11 @@ jimport( 'joomla.application.component.view');
 
 class realpinViewrpdefault extends JViewLegacy
 {
+	function assignRef($mystring, $param)
+	{
+		$this->{$mystring} = $param;
+	}
+
 	function display($tpl = null)
 	{
 		global $mainframe;

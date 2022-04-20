@@ -8,6 +8,15 @@
 
 defined('_JEXEC') or die('Restricted access');
 
+?>
+
+<div id="j-sidebar-container" class="span2">
+<?php echo JHtmlSidebar::render(); ?>
+</div>
+
+<br/>
+
+<?php
 
 function dir_size($array)
 {
@@ -161,7 +170,7 @@ function submitbutton(pressbutton)
 		$community=$row->config_community;
 		$pinboard=$row->config_id;
 
-		$published		= JHTML::_('grid.published', $row, $i );
+		$published		= JHTML::_('jgrid.published', $row->published, $i );
 		$checked 	= JHTML::_('grid.id',   $i, $row->config_id );
 		 
 		$table	= '#__realpin_items';	
@@ -181,7 +190,7 @@ function submitbutton(pressbutton)
 		$table	= '#__realpin_settings';	
 		$query = 'UPDATE '.$table.' Set config_space="'.$space2.'", config_items="'.$menge.'" WHERE config_id="'.$pinboard.'"';
 		$db->setQuery($query);
-		$db->query();		
+		$db->execute();		
 
 		?>
 		<tr>

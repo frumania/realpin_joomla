@@ -104,5 +104,5 @@ CREATE TABLE IF NOT EXISTS `#__realpin_items` (
 ) DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 INSERT IGNORE INTO `#__realpin_items` (`id`,`xPos`, `yPos`, `type`, `text`, `url`, `pw`, `title`, `author`, `created`, `published`, `sticky`, `pinboard`, `params`) VALUES
-('1','229', '82', 'postit', 'My first Postit!', '', 'admin', 'New #1', 'admin', '2021-01-01 00:00:00', 1, 0, '5',''),
-('2','274', '231', 'youtube', '', 'https://www.youtube.com/watch?v=ta_la6vIaFc', '', 'Top Goals WM 2006', 'admin', '2021-01-01 00:00:00', 1, 0, '5','');
+('1','229', '82', 'postit', 'My first Postit!', '', 'admin', 'New #1', 'admin', '2022-03-03 00:00:00', 1, 0, '5',''),
+('2','274', '231', 'youtube', '', 'https://www.youtube.com/watch?v=ta_la6vIaFc', '', 'Top Goals WM 2006', 'admin', '2022-03-03 00:00:00', 1, 0, '5','');

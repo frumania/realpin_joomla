@@ -8,6 +8,8 @@
 
 defined('_JEXEC') or die('Restricted access');
 
+use Joomla\Utilities\ArrayHelper;
+
 class startControllerpinboards extends startController
 {
 	
@@ -23,7 +25,7 @@ class startControllerpinboards extends startController
 	
     function display($cachable = false, $urlparams = false)
 	{
-		JRequest::setVar( 'view', 'pinboards' );
+		JFactory::getApplication()->input->set( 'view', 'pinboards' );
 		
 		parent::display();
 	}
@@ -39,15 +41,15 @@ class startControllerpinboards extends startController
 	
     function add()
 	{
-	    $cid  = JRequest::getVar( 'cid', array(), 'REQUEST', 'array' );
-		JArrayHelper::toInteger( $cid );
+	    $cid  = JFactory::getApplication()->input->get('cid');
+		ArrayHelper::toInteger( $cid );
 		$cids = implode( ',', $cid );
         $this->setRedirect( 'index.php?option=com_realpin&controller=editpinboard&task=edit&cid[]='.$cids);
 	}
 
 	function remove()
 	{
-		$cids		= JRequest::getVar( 'cid', array(), 'post', 'array' );
+		$cids		= JFactory::getApplication()->input->get( 'cid', array(), 'post', 'array' );
 	    $db	= JFactory::getDBO();
 	    jimport('joomla.filesystem.file');		
 
@@ -56,7 +58,7 @@ class startControllerpinboards extends startController
 			$table = "#__realpin_settings";
 			$query = "DELETE FROM ".$table." WHERE config_id = ".$cids[$i];
 			$db->setQuery( $query );
-			$db->query();
+			$db->execute();
 			
 			$items = "#__realpin_items";
 			$query = 'SELECT url FROM '.$items.' WHERE pinboard="'.$cids[$i].'" AND type="pic" ORDER by created DESC';
@@ -75,7 +77,7 @@ class startControllerpinboards extends startController
 			
 			$query = "DELETE FROM ".$items." WHERE pinboard = '".$cids[$i]."'";
 			$db->setQuery( $query );
-			$db->query();
+			$db->execute();
 		}
 								
 		$msg= JText::_( 'LANG_CON9' );			
@@ -90,8 +92,8 @@ class startControllerpinboards extends startController
 		// Initialize variables
 		$db			= JFactory::getDBO();
 		$user		= JFactory::getUser();
-		$cid		= JRequest::getVar( 'cid', array(), 'post', 'array' );
-		$task		= JRequest::getCmd( 'task' );
+		$cid		= JFactory::getApplication()->input->get('cid');
+		$task		= JFactory::getApplication()->input->get( 'task' );
 		$publish	= ($task == 'publish');
 		$n			= count( $cid );
 
@@ -99,7 +101,7 @@ class startControllerpinboards extends startController
 			return JError::raiseWarning( 500, JText::_( 'LANG_CON6' ) );
 		}
 
-		JArrayHelper::toInteger( $cid );
+		ArrayHelper::toInteger( $cid );
 		$cids = implode( ',', $cid );
 
 		$table	= '#__realpin_settings';
@@ -107,7 +109,7 @@ class startControllerpinboards extends startController
 		$query = 'UPDATE '.$table.' SET published = '.(int) $publish.' WHERE config_id IN ( '. $cids .' )'
 		;
 		$db->setQuery( $query );
-		if (!$db->query()) {
+		if (!$db->execute()) {
 			return JError::raiseWarning( 500, $db->getError() );
 		}
 		$this->setMessage( JText::sprintf( $publish ? 'Items published' : 'Items unpublished', $n ) );

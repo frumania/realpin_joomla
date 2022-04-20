@@ -70,14 +70,14 @@ class com_realpinInstallerScript
 		$buffer = file_get_contents($sqlfile);
 		if ($buffer !== false) {
 			jimport('joomla.installer.helper');
-			$queries = JInstallerHelper::splitSql($buffer);
+			$queries = JDatabaseDriver::splitSql($buffer); //JInstallerHelper::splitSql($buffer);
 			if (count($queries) != 0) {
 				foreach ($queries as $query)
 				{
 					$query = trim($query);
-					if ($query != '' && $query{0} != '#') {
+					if ($query != '' && $query[0] != '#') {
 						$db->setQuery($query);
-						if (!$db->query()) {
+						if (!$db->execute()) {
 							JError::raiseWarning(1, JText::sprintf('JLIB_INSTALLER_ERROR_SQL_ERROR', $db->stderr(true)));
 							return false;
 						}
@@ -306,7 +306,7 @@ class com_realpinInstallerScript
 		$itemstargettable = '#__realpin_items';
 		$sql="SELECT * from ".$itemssourcetable." ORDER BY created ASC";
 		$db->setQuery($sql);
-		$db->query();
+		$db->execute();
 		$result= $db->loadAssocList();
 
 		for ($p=0, $c=count( $result ); $p < $c; $p++)
@@ -319,12 +319,12 @@ class com_realpinInstallerScript
 		$sql2="INSERT INTO ".$itemstargettable." (`id`, `xPos`, `yPos`, `type`, `text`, `url`, `pw`, `title`, `author`, `created`, `expires`, `published`, `sticky`, `pinboard`, `params`) VALUES
 	('', '".$result[$p]['xPos']."', '".$result[$p]['yPos']."', '".$result[$p]['type']."', '".$result[$p]['text']."', '".$result[$p]['url']."', '".$result[$p]['pw']."', '".$result[$p]['title']."', '".$result[$p]['author']."', '".$result[$p]['created']."', '0000-00-00 00:00:00', '".$result[$p]['published']."', 0, '', '')";
 		$db->setQuery($sql2);
-		$db->query();
+		$db->execute();
 		}
 
 		$sql="RENAME TABLE #__realpin TO #__realpin_old;";
 		$db->setQuery($sql);
-		$db->query();
+		$db->execute();
 
 	//#########end copy items#########
 	}
@@ -336,7 +336,7 @@ class com_realpinInstallerScript
 		$sourcetable = '#__realpin_config';
 		$sql="SELECT param, value from ".$sourcetable;
 		$db->setQuery($sql);
-		$db->query();
+		$db->execute();
 		$copyresult= $db->loadAssocList();
 
 		$targettable = '#__realpin_settings';
@@ -350,15 +350,15 @@ class com_realpinInstallerScript
 		if($key=='limit'){$key='maxitems';}
 		$sql="UPDATE ".$targettable." Set $key='$val' WHERE config_name='realpin_default'";
 		$db->setQuery($sql);
-		$db->query();
+		$db->execute();
 		$sql="UPDATE ".$targettable." Set $key='$val' WHERE config_name='default_private'";
 		$db->setQuery($sql);
-		$db->query();
+		$db->execute();
 		}
 
 		$sql="RENAME TABLE #__realpin_config TO #__realpin_config_old;";
 		$db->setQuery($sql);
-		$db->query();
+		$db->execute();
 
 	//##########end copy settings#############
 	}
@@ -368,7 +368,7 @@ class com_realpinInstallerScript
 		$db		=& JFactory::getDBO();
 		$sql="UPDATE #__realpin_items as m set pinboard = (SELECT config_id FROM #__realpin_settings WHERE config_name = 'realpin_default')";
 		$db->setQuery($sql);
-		$db->query();
+		$db->execute();
 	}
 
 	function updateVersion()
@@ -376,7 +376,7 @@ class com_realpinInstallerScript
 		$db = JFactory::getDBO();
 		$sql="UPDATE `#__realpin_settings` SET `version` = '".RP_VERSION."' WHERE config_name!='default_private_global';";
 		$db->setQuery($sql);
-		$db->query();
+		$db->execute();
 	}
 
 	function add_column_if_not_exist($table, $column, $column_attr = "text NOT NULL", $default = "" )
@@ -400,13 +400,13 @@ class com_realpinInstallerScript
 				  if(!$exists)
 				  {
 					  $db->setQuery("ALTER TABLE `$table` ADD `$column` $column_attr");
-					  $db->query();
+					  $db->execute();
 
 					  $db->setQuery("UPDATE #__realpin_settings set `$column` = 'true' WHERE config_name = 'default_private_global'");
-					  $db->query();
+					  $db->execute();
 
 					  $db->setQuery("UPDATE #__realpin_settings set `$column` = '".$default."' WHERE config_name != 'default_private_global'");
-					  $db->query();
+					  $db->execute();
 
 				  }
 	}

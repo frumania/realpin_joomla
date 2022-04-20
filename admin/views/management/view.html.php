@@ -22,9 +22,15 @@ class startViewmanagement extends JViewLegacy
 	 * Hellos view display method
 	 * @return void
 	 **/
+
+	function assignRef($mystring, $param)
+	{
+		$this->{$mystring} = $param;
+	}
+
 	function display($tpl = null)
 	{
-		$rpname=JRequest::getVar( 'rpname' , '', 'REQUEST');
+		$rpname=JFactory::getApplication()->input->get( 'rpname' , '', 'REQUEST');
 		JToolBarHelper::title(JText::_( 'RealPin: ').JText::_('LANG_BUTTON2')." (".$rpname.")", 'generic.png' );
 		JToolBarHelper::publishList();
 		JToolBarHelper::unpublishList();
@@ -33,8 +39,8 @@ class startViewmanagement extends JViewLegacy
 		JToolBarHelper::cancel( 'cancel', JText::_('LANG_CLOSE') );
 	//	JToolBarHelper::addNewX();
 	
-	    $pinboard=JRequest::getVar( 'pinboard' , '', 'REQUEST');
-		$community=JRequest::getVar( 'community' , '', 'REQUEST');
+	    $pinboard=JFactory::getApplication()->input->get( 'pinboard' , '', 'REQUEST');
+		$community=JFactory::getApplication()->input->get( 'community' , '', 'REQUEST');
 		
 		if($community==1)
         {
@@ -55,7 +61,7 @@ class startViewmanagement extends JViewLegacy
 		$filter_order_Dir	= $mainframe->getUserStateFromRequest( "$option.filter_order_Dir",	'filter_order_Dir',	'DESC',		'word' );
 		$filter_state		= $mainframe->getUserStateFromRequest( "$option.filter_state",		'filter_state',		'',		'word' );
 		$search				= $mainframe->getUserStateFromRequest( "$option.search",			'search',			'',		'string' );
-		$search				= JString::strtolower( $search );
+		$search				= strtolower( $search );
 
 		$limit		= $mainframe->getUserStateFromRequest( 'global.list.limit', 'limit', 50, 'int' );
 		$limitstart	= $mainframe->getUserStateFromRequest( $option.'.limitstart', 'limitstart', 0, 'int' );
@@ -101,11 +107,14 @@ class startViewmanagement extends JViewLegacy
 		. $orderby
 		;
 		$db->setQuery( $query, $pagination->limitstart, $pagination->limit );
-		$rows = $db->loadObjectList();
-
-		if ($db->getErrorNum())
+		
+		try
 		{
-			echo $db->stderr();
+			$rows = $db->loadObjectList();
+		}
+		catch (Exception $e)
+		{
+			$app->enqueueMessage(JText::_($e->getMessage()), 'error');
 			return false;
 		}
 

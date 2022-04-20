@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<extension type="component" version="3.0" method="upgrade">
+<extension type="component" version="4.0" method="upgrade">
 
 	<name>RealPin</name>
-	<creationDate>January 2021</creationDate>
+	<creationDate>April 2022</creationDate>
 	<author>frumania</author>
 	<authorEmail>info@frumania.com</authorEmail>
 	<authorUrl>https://frumania.com</authorUrl>
 	<copyright>All rights reserved</copyright>
 	<license>GNU/GPL</license>
-	<version>1.6.0</version>
+	<version>1.6.1</version>
 	<description></description>
 
 	<scriptfile>install.php</scriptfile>

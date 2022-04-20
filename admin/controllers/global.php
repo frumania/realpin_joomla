@@ -13,7 +13,7 @@ class startControllerglobal extends startController
 	
     function display($cachable = false, $urlparams = false)
 	{
-		JRequest::setVar( 'view', 'global' );
+		JFactory::getApplication()->input->set( 'view', 'global' );
 		
 		parent::display();
 	}
@@ -50,14 +50,14 @@ class startControllerglobal extends startController
 	  
 	  $query="DROP TABLE IF EXISTS ". $settingstable;
 	  $db->setQuery($query);
-	  //$db->query();
+	  //$db->execute();
       $queries=$this->getQueriesFromFile( JPATH_SITE.DS.'administrator'.DS.'components'.DS.'com_realpin'.DS.'install.sql');
 	 
 		for ($i = 0, $ix = count($queries); $i < $ix; ++$i) { 
 		      $queries[$i]=str_replace("`#__realpin_config`", $settingstable, $queries[$i]);
 			  //$queries[$i]=str_replace("`#__realpin`", $table, $queries[$i]);
 			  $db->setQuery($queries[$i]);
-			  //$db->query();
+			  //$db->execute();
 		}
 		
 	  //$this->unlinkRecursive($folder.'thumbs',false);
@@ -73,10 +73,10 @@ class startControllerglobal extends startController
 	
 	function save()
 	{
-		$data = JRequest::get( 'post' );
-		$community=JRequest::getVar( 'community', '', 'post');
-		$pinboard=JRequest::getVar( 'pinboard', '', 'post');		
-		$isglobal=JRequest::getVar( 'global', false, 'post');
+		$data = JFactory::getApplication()->input->post->getArray();
+		$community=JFactory::getApplication()->input->get( 'community', '', 'post');
+		$pinboard=JFactory::getApplication()->input->get( 'pinboard', '', 'post');		
+		$isglobal=JFactory::getApplication()->input->get( 'global', false, 'post');
 		jimport('joomla.filesystem.file');
 		
 		$db	=& JFactory::getDBO();
@@ -95,7 +95,7 @@ class startControllerglobal extends startController
 			$sql="UPDATE ".$settingstable." Set $key='$val' WHERE config_id='".$pinboard."' ";
 			//echo $sql."\n";
 		    $db->setQuery($sql);
-			$db->query();
+			$db->execute();
 			}
 		}
 
@@ -130,7 +130,7 @@ class startControllerglobal extends startController
 	
 	function cancel()
 	{
-		$community=JRequest::getVar( 'community', '', 'post');
+		$community=JFactory::getApplication()->input->get( 'community', '', 'post');
 		$msg = JText::_( 'LANG_CON7' );
 		$this->setRedirect( 'index.php?option=com_realpin&controller=pinboards&community='.$community.'&task=display', $msg );
 	}
@@ -140,9 +140,9 @@ class startControllerglobal extends startController
 	    global $mainframe;
 	    $db		= JFactory::getDBO();
 
-		$key=JRequest::getVar( 'key' , '', 'POST');
-		$val=JRequest::getVar( 'val' , '', 'POST');
-		$community=JRequest::getVar( 'community', '', 'REQUEST');
+		$key=JFactory::getApplication()->input->get( 'key' , '', 'POST');
+		$val=JFactory::getApplication()->input->get( 'val' , '', 'POST');
+		$community=JFactory::getApplication()->input->get( 'community', '', 'REQUEST');
 		$settingstable = '#__realpin_settings';
 		
 		if($community==1)
@@ -159,7 +159,7 @@ class startControllerglobal extends startController
 				$key=strtolower($key);
 			    $sql="UPDATE ".$settingstable." Set $key='$val' WHERE config_name='default_".$check."_global' ";
 				$db->setQuery($sql);		
-				$db->query();
+				$db->execute();
 				//echo $sql;
 		        $msg= JText::_( 'LANG_CON3A' );
 		 }
@@ -172,7 +172,7 @@ class startControllerglobal extends startController
 	    global $mainframe;
 	    $db		= JFactory::getDBO();
 		jimport('joomla.filesystem.file');
-		$pinboard=JRequest::getVar( 'pinboard', '', 'REQUEST');	
+		$pinboard=JFactory::getApplication()->input->get( 'pinboard', '', 'REQUEST');	
 		if($pinboard==""){$pinboard="rp_default";}
 		
 		$img=$_FILES['myfile']['name'];
