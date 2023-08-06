@@ -31,7 +31,7 @@ $doc->addScript(ROOT.'/js/photoswipe/code.photoswipe.jquery-3.0.4.min.js');
 
 ob_start();  //startet Buffer
 include(JPATH_COMPONENT.'/includes/static_js.php');  //datei ist jetzt im Buffer
-$script.=ob_get_contents();  //Buffer wird in $script geschrieben
+$script=ob_get_contents();  //Buffer wird in $script geschrieben
 ob_end_clean();  //Buffer wird gel�scht
 
 $script = str_replace("<script type=\"text/javascript\">", "", $script);

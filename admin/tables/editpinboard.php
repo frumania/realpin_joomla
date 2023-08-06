@@ -32,6 +32,11 @@ class Tableeditpinboard extends JTable
 	 *
 	 * @param object Database connector object
 	 */
+
+	public function __construct(&$db){
+		parent::__construct('#__realpin_settings', 'config_id', $db);
+	}
+
 	function Tableeditpinboard(& $db) {
 		
 		$table	= '#__realpin_settings';

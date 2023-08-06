@@ -8,10 +8,13 @@ Virtual Pinboard for Joomla CMS
 
 ## Changelog
 
-1.6.2 Joomla 4 Version
+1.6.3 
+
+php8 Support
 
 1.6.2
 
+Joomla 4 Version
 Added option to enable/disable GDPR consent
 
 1.6.1

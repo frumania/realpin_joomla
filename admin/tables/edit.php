@@ -32,6 +32,10 @@ class Tableedit extends JTable
 	 *
 	 * @param object Database connector object
 	 */
+	public function __construct(&$db){
+	  parent::__construct('#__realpin_items', 'id', $db);
+	}
+
 	function Tableedit(& $db) {
 		
 		$table	= '#__realpin_items';

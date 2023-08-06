@@ -23,7 +23,7 @@ class startViewmanagement extends JViewLegacy
 	 * @return void
 	 **/
 
-	function assignRef($mystring, $param)
+	function assignRef($mystring, &$param)
 	{
 		$this->{$mystring} = $param;
 	}
@@ -114,7 +114,7 @@ class startViewmanagement extends JViewLegacy
 		}
 		catch (Exception $e)
 		{
-			$app->enqueueMessage(JText::_($e->getMessage()), 'error');
+			$mainframe->enqueueMessage(JText::_($e->getMessage()), 'error');
 			return false;
 		}
 

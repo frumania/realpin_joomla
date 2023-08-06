@@ -17,7 +17,7 @@ class startViewedit extends JView
 	 * @return void
 	 **/
 
-	function assignRef($mystring, $param)
+	function assignRef($mystring, &$param)
 	{
 		$this->{$mystring} = $param;
 	}

@@ -18,7 +18,7 @@ jimport( 'joomla.application.component.view' );
  */
 class startViewpinboards extends JViewLegacy
 {
-	function assignRef($mystring, $param)
+	function assignRef($mystring, &$param)
 	{
 		$this->{$mystring} = $param;
 	}
@@ -111,15 +111,15 @@ class startViewpinboards extends JViewLegacy
 		;
 		$db->setQuery( $query, $pagination->limitstart, $pagination->limit );
 		$rows = $db->loadObjectList();
-		
+
 		try
 		{
 			$rows = $db->loadObjectList();
 		}
 		catch (Exception $e)
 		{
-			$app->enqueueMessage(JText::_($e->getMessage()), 'error');
-			return false;
+			//$mainframe->enqueueMessage(JText::_($e->getMessage()), 'error');
+			//return false;
 		}
 
 		// state filter

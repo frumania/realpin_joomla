@@ -55,7 +55,7 @@ define("STATE_TRUE_IMG", "icon-save");
 
 function getglobal($state)
 {
-	
+$result=false;
 		if($state=="false")
 		$result = STATE_FALSE_IMG;
 		if($state=="true")

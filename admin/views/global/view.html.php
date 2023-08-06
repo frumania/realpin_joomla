@@ -19,7 +19,7 @@ jimport( 'joomla.application.component.view' );
 class startViewglobal extends JViewLegacy
 {
 
-	function assignRef($mystring, $param)
+	function assignRef($mystring, &$param)
 	{
 		$this->{$mystring} = $param;
 	}
